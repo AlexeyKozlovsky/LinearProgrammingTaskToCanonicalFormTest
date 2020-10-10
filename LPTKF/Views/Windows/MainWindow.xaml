@@ -17,7 +17,7 @@
         </Style>
         <Style x:Key="buttonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
             <Setter Property="Foreground" Value="#000000"/>
-            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
     </Window.Resources>
@@ -34,9 +34,11 @@
 
             <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight">
                 <TextBox MinWidth="100" MaxWidth="200" Margin="5" Style="{StaticResource MaterialDesignTextBox}"
-                         FontSize="12" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"/>
+                         FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"
+                         Text="{Binding Rows}"/>
                 <TextBox MinWidth="100" MaxWidth="200" Margin="5" Style="{StaticResource MaterialDesignTextBox}"
-                         FontSize="12" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"/>
+                         FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"
+                         Text="{Binding Columns}"/>
                 <Button Content="Сгенерировать" MinWidth="100" Margin="5" Style="{StaticResource buttonStyle}"/>
             </StackPanel>
             <Grid Grid.Row="1">
@@ -48,7 +50,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="1.25*"/>
+                    <RowDefinition Height="1.75*"/>
                     <RowDefinition/>
                     <RowDefinition Height="3*"/>
                     <RowDefinition Height="*"/>
@@ -74,9 +76,12 @@
                            Style="{StaticResource textBlockStyle}"/>
 
 
-                <DataGrid Grid.Row="2" Grid.Column="0" Style="{StaticResource MaterialDesignDataGrid}">
+                <DataGrid Grid.Row="2" Grid.Column="0" Style="{StaticResource MaterialDesignDataGrid}"
+                          ItemsSource="{Binding InitGoalFuncDataGrid}"
+                          x:Name="initGoalFuncDataGrid">
                 </DataGrid>
-                <DataGrid Grid.Row="2" Grid.Column="1" Style="{StaticResource MaterialDesignDataGrid}">
+                <DataGrid Grid.Row="2" Grid.Column="1" Style="{StaticResource MaterialDesignDataGrid}"
+                          >
                 </DataGrid>
                 <DataGrid Grid.Row="4" Grid.Column="0" Style="{StaticResource MaterialDesignDataGrid}">
                 </DataGrid>

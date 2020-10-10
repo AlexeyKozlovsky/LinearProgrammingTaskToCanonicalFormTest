@@ -10,5 +10,7 @@ namespace LPTKF.Models {
             get => goalFunction.Vars;
             set => goalFunction.Vars = value;
         }
+
+        
     }
 }

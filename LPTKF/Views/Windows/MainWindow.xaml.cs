@@ -1,4 +1,5 @@
 ﻿using LPTKF.Models;
+using LPTKF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,35 +21,33 @@ namespace LPTKF {
     /// </summary>
     public partial class MainWindow : Window {
         LinearProgrammingTask task;
+        MainWindowViewModel vm;
+
 
         public MainWindow() {
             InitializeComponent();
-            List<double> goalFuncVars = new List<double>() {
-                2, 3, 4, 4
-            };
-            double goalFuncFreeValue = 10;
-
-            GoalFunction goal = new GoalFunction(goalFuncVars, CompareOperator.Equal, 10, GoalFunctionAim.Max);
-
-
-            List<IMathExpression> mathExpressions = new List<IMathExpression>() {
-                new MathExpression(new List<double>(){ 1, 2, 3, 4}, CompareOperator.Less, 10),
-                new MathExpression(new List<double>(){ 8, 6, 1, 4}, CompareOperator.Equal, 10),
-                new MathExpression(new List<double>(){ -4, 2, 0, 4}, CompareOperator.More, 10),
-            };
-
-
+            vm = (MainWindowViewModel)DataContext;
             
-            MathExpressionSystem limitSystem = new MathExpressionSystem(mathExpressions);
+            InitDataGrid(initGoalFuncDataGrid);
+            
+        }
 
-            CompareOperator[] compares = new CompareOperator[4] {
-                CompareOperator.More, CompareOperator.More, CompareOperator.Undefined, CompareOperator.Less
-            };
+        private void InitDataGrid(DataGrid dataGrid) {
+            DataGridColumn column;
+            int columnsNum = int.Parse(vm.Columns);
+            for (int i = 0; i < columnsNum; i++) {
+                column = new DataGridTextColumn();
+                column.Header = $"x{i + 1}";
+                dataGrid.Columns.Add(column);
+            }
 
-            task = new LinearProgrammingTask(goal, limitSystem, compares);
+            column = new DataGridComboBoxColumn();
+            column.Header = "Знак";
+            dataGrid.Columns.Add(column);
 
-            task.MakeCanonical();
-            Console.WriteLine("!");
+            column = new DataGridTextColumn();
+            column.Header = "b";
+            dataGrid.Columns.Add(column);
         }
     }
 }

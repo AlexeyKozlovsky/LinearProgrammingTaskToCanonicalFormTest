@@ -22,8 +22,8 @@ namespace LPTKF.ViewModels {
         #endregion
 
 
-        private GoalFunctionDataGridItem goalFuncDataGrid;
-        public GoalFunctionDataGridItem GoalFuncDataGrid{
+        private GoalFunction goalFuncDataGrid;
+        public GoalFunction InitGoalFuncDataGrid{
             get => goalFuncDataGrid;
             set => Set(ref goalFuncDataGrid, value);
         }
