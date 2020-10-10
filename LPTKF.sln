@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPTKF", "LPTKF\LPTKF.csproj", "{DD0956C1-9E8F-4377-B0C3-EC9C0793296E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LPTKF", "LPTKF\LPTKF.csproj", "{DD0956C1-9E8F-4377-B0C3-EC9C0793296E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsoleFotLPTKF", "TestConsoleFotLPTKF\TestConsoleFotLPTKF.csproj", "{D5BDC8D1-4A73-4795-A7CB-BF102C028FB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{DD0956C1-9E8F-4377-B0C3-EC9C0793296E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD0956C1-9E8F-4377-B0C3-EC9C0793296E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD0956C1-9E8F-4377-B0C3-EC9C0793296E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5BDC8D1-4A73-4795-A7CB-BF102C028FB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5BDC8D1-4A73-4795-A7CB-BF102C028FB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5BDC8D1-4A73-4795-A7CB-BF102C028FB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5BDC8D1-4A73-4795-A7CB-BF102C028FB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

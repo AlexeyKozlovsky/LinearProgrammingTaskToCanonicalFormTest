@@ -15,7 +15,7 @@ namespace LPTKF.Models
     /// <summary>
     /// Матрица
     /// </summary>
-    class Matrix
+    public class Matrix
     {
         /// <summary>
         /// Двумерный массив значений элементов матрицы

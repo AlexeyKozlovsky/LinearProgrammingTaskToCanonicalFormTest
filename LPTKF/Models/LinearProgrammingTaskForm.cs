@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace LPTKF.Models {
-    enum LinearProgrammingTaskForm {
+    public enum LinearProgrammingTaskForm {
         NonCanonical,
         Canonical
     }

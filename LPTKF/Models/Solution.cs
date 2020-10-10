@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LPTKF.Models
 {
-    class Solution : LinearEquationSystem
+    public class Solution : LinearEquationSystem
     {
         private LinearEquationSystem initialSystem;
         private int[] basisColumns;

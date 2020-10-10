@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LPTKF.Models
 {
-    class SolutionsField
+    public class SolutionsField
     {
         private List<Solution> solutions;
 

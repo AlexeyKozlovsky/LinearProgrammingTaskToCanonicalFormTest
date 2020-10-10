@@ -6,7 +6,7 @@ namespace LPTKF.Models {
     /// <summary>
     /// Класс СЛАУ
     /// </summary>
-    class LinearEquationSystem : Matrix
+    public class LinearEquationSystem : Matrix
     {
 
         public SolutionsField SolutionsField { get; private set; }

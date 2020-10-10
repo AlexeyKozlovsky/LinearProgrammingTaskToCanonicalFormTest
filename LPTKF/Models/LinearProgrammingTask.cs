@@ -7,7 +7,7 @@ using System.Threading.Tasks.Sources;
 using System.Windows.Markup;
 
 namespace LPTKF.Models {
-    class LinearProgrammingTask {
+    public class LinearProgrammingTask {
         public GoalFunction GoalFunction { get; private set; }
         public MathExpressionSystem LimitSystem { get; private set; }
         public LinearProgrammingTaskForm TaskForm { get; private set; }
@@ -17,7 +17,8 @@ namespace LPTKF.Models {
         /// Словарь перевода переменных
         /// </summary>
         private Dictionary<int, List<int>> variablesDict;
-        
+
+        public LinearEquationSystem LinearEquationLimitSystem { get; private set; }
 
         /// <summary>
         /// Колчиество переменных
@@ -147,6 +148,8 @@ namespace LPTKF.Models {
 
             MakeEquations();
             UpdateGoalFunction();
+            this.LinearEquationLimitSystem = this.LimitSystem.ToLinearEquationSystem();
+            this.LinearEquationLimitSystem.GetAllBasisSolutions();
             this.TaskForm = LinearProgrammingTaskForm.Canonical;
         }
 

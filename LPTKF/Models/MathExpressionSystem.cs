@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace LPTKF.Models {
-    class MathExpressionSystem : IEnumerable, IEnumerator{
+    public class MathExpressionSystem : IEnumerable, IEnumerator{
 
         public List<IMathExpression> limits { get; private set; }
         public IMathExpression this[int index] {
@@ -43,6 +43,8 @@ namespace LPTKF.Models {
         }
 
         #endregion
+
+        public MathExpressionSystem() => this.limits = new List<IMathExpression>();
 
         public MathExpressionSystem(List<IMathExpression> limits) =>
             this.limits = limits;
