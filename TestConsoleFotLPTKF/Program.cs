@@ -6,27 +6,28 @@ using System.Windows.Media.Animation;
 
 namespace TestConsoleFotLPTKF {
     class Program {
-        private LinearProgrammingTask task;
+        private static LinearProgrammingTask task;
         
         static void Main(string[] args) {
-            InitLinearProgrammingTask();
+            task = InitLinearProgrammingTask();
+            PrintSolution(task.LinearEquationLimitSystem.SolutionsField[0]);
+            Console.WriteLine(task.ReturnCharacteristics()); 
         }
 
-        private static void InitLinearProgrammingTask() {
+        private static LinearProgrammingTask InitLinearProgrammingTask() {
             GoalFunction goalFunc = InitGoalFunction();
             MathExpressionSystem limitSystem = InitLimitSystem();
             CompareOperator[] compareOperators = InitCompareOperators(goalFunc.Count);
             LinearProgrammingTask task = new LinearProgrammingTask(goalFunc, limitSystem, compareOperators);
             task.MakeCanonical();
             
-            
-            PrintSolution(task.LinearEquationLimitSystem.SolutionsField[0]);
+            return task;
         }
 
         private static void PrintSolution(Solution solution) {
             for (int i = 0; i < solution.Rows; i++) {
                 for (int j = 0; j < solution.Columns; j++) {
-                    Console.Write(solution[i, j] + "\t");
+                    Console.Write(Math.Round(solution[i, j], 2) + "\t");
                 }
                 Console.WriteLine();
             }

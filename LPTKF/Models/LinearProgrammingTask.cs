@@ -153,7 +153,75 @@ namespace LPTKF.Models {
             this.TaskForm = LinearProgrammingTaskForm.Canonical;
         }
 
-        
+        private string ReturnVars() {
+            string result = "";
+            foreach (var k in this.variablesDict) {
+                if (k.Key == -k.Value[0]) result += $"x{k.Key + 1} = -x{Math.Abs(k.Value[0]) + 1};\t";
+                else result += $"x{k.Key + 1} = x{Math.Abs(k.Value[0]) + 1} - x{Math.Abs(k.Value[1]) + 1};\t";
+            }
+
+            return result;
+        }
+
+
+        private string ReturnGoalFunction() {
+            string result = "";
+            for (int i = 0; i < this.GoalFunction.Count; i++) {
+                result += $"{this.GoalFunction[i]}x{i} "; 
+            }
+
+            result += "-> ";
+            result += this.GoalFunction.Aim == GoalFunctionAim.Min ? "min" : "max";
+            result += "\n";
+            return result;
+        }
+
+        private string ReturnMathExpression(IMathExpression expression) {
+            string result = "";
+            for (int i = 0; i < expression.VariableValues.Count; i++) {
+                result += $"{expression[i]}x{i+1} ";
+            }
+
+            string operatorString = "";
+            switch (expression.ComparerOperator) {
+                case CompareOperator.Equal:
+                    operatorString = "=";
+                    break;
+                case CompareOperator.Less:
+                    operatorString = "<=";
+                    break;
+                case CompareOperator.More:
+                    operatorString = ">=";
+                    break;
+            }
+
+            result += $" {operatorString} {expression.FreeValue}\n";
+            return result;
+        }
+
+        private string ReturnLimitSystem() {
+            string result = "";
+            foreach (IMathExpression expression in this.LimitSystem) {
+                result += ReturnMathExpression(expression);
+            }
+
+            return result;
+        }
+
+        public string ReturnCharacteristics() {
+            string result = "";
+
+            result += this.TaskForm == LinearProgrammingTaskForm.Canonical ? "Каноническая форма" :
+                "Не каноническая форма";
+            result += "\n";
+
+            result += this.ReturnVars();
+            result += $"\nЦелевая функция: {this.ReturnGoalFunction()}\n";
+            result += "Система ограничений:\n";
+            result += ReturnLimitSystem();
+
+            return result;
+        }
 
     }
 }
