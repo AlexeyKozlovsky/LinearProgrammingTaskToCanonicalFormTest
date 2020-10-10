@@ -12,9 +12,30 @@
         <vm:MainWindowViewModel/>
     </Window.DataContext>
     
-    <Grid >
+    <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Изначальная форма" Grid.Row="0" Grid.Column="0"/>
+        <TextBlock Text="Каноническая форма" Grid.Row="0" Grid.Column="1"/>
+        <TextBlock Text="Целевая функция" Grid.Row="1" Grid.Column="0"/>
+        <TextBlock Text="Целевая функция" Grid.Row="1" Grid.Column="1"/>
+        <TextBlock Text="Система ограничений" Grid.Row="3" Grid.Column="0"/>
+        <TextBlock Text="Система ограничений" Grid.Row="3" Grid.Column="1"/>
+
+        <DataGrid>
+            
+        </DataGrid>
     </Grid>
 </Window>

@@ -18,6 +18,12 @@ namespace LPTKF.Models {
             get => variableValues.Count;
         }
 
+        public List<double> Vars {
+            get => variableValues;
+            set => variableValues = value;
+        }
+
+
         List<double> IMathExpression.VariableValues { get => variableValues; }
 
         private CompareOperator compareOperator;
