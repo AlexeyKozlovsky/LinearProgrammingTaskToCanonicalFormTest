@@ -4,38 +4,109 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm ="clr-namespace:LPTKF.ViewModels"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:LPTKF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
 
+    <Window.Resources>
+        <Style x:Key ="textBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource MaterialDesignCaptionTextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="22"/>
+        </Style>
+        <Style x:Key="buttonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+            <Setter Property="Foreground" Value="#000000"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+    </Window.Resources>
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
     
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="12*"/>
+            </Grid.RowDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight">
+                <TextBox MinWidth="100" MaxWidth="200" Margin="5" Style="{StaticResource MaterialDesignTextBox}"
+                         FontSize="12" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"/>
+                <TextBox MinWidth="100" MaxWidth="200" Margin="5" Style="{StaticResource MaterialDesignTextBox}"
+                         FontSize="12" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"/>
+                <Button Content="Сгенерировать" MinWidth="100" Margin="5" Style="{StaticResource buttonStyle}"/>
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Изначальная форма" Grid.Row="0" Grid.Column="0"/>
-        <TextBlock Text="Каноническая форма" Grid.Row="0" Grid.Column="1"/>
-        <TextBlock Text="Целевая функция" Grid.Row="1" Grid.Column="0"/>
-        <TextBlock Text="Целевая функция" Grid.Row="1" Grid.Column="1"/>
-        <TextBlock Text="Система ограничений" Grid.Row="3" Grid.Column="0"/>
-        <TextBlock Text="Система ограничений" Grid.Row="3" Grid.Column="1"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="1.25*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
 
-        <DataGrid>
-            
-        </DataGrid>
+                <TextBlock Text="Изначальная форма" Grid.Row="0" Grid.Column="0"
+                           Style="{StaticResource textBlockStyle}" FontWeight="Bold"/>
+                <TextBlock Text="Каноническая форма" Grid.Row="0" Grid.Column="1"
+                           Style="{StaticResource textBlockStyle}" FontWeight="Bold"/>
+                <TextBlock Text="Целевая функция" Grid.Row="1" Grid.Column="0"
+                           Style="{StaticResource textBlockStyle}"/>
+                <TextBlock Text="Целевая функция" Grid.Row="1" Grid.Column="1"
+                           Style="{StaticResource textBlockStyle}"/>
+                <TextBlock Text="Система ограничений" Grid.Row="3" Grid.Column="0"
+                           Style="{StaticResource textBlockStyle}"/>
+                <TextBlock Text="Система ограничений" Grid.Row="3" Grid.Column="1"
+                           Style="{StaticResource textBlockStyle}"/>
+                <TextBlock Text="Условия на переменные" Grid.Row="5" Grid.Column="0"
+                           Style="{StaticResource textBlockStyle}"/>
+                <TextBlock Text="Опорные решения" Grid.Row="5" Grid.Column="1"
+                           Style="{StaticResource textBlockStyle}"/>
+
+
+                <DataGrid Grid.Row="2" Grid.Column="0" Style="{StaticResource MaterialDesignDataGrid}">
+                </DataGrid>
+                <DataGrid Grid.Row="2" Grid.Column="1" Style="{StaticResource MaterialDesignDataGrid}">
+                </DataGrid>
+                <DataGrid Grid.Row="4" Grid.Column="0" Style="{StaticResource MaterialDesignDataGrid}">
+                </DataGrid>
+                <DataGrid Grid.Row="4" Grid.Column="1" Style="{StaticResource MaterialDesignDataGrid}">
+                </DataGrid>
+                <DataGrid Grid.Row="6" Grid.Column="0" Style="{StaticResource MaterialDesignDataGrid}">
+                </DataGrid>
+                <DataGrid Grid.Row="6" Grid.Column="1" Style="{StaticResource MaterialDesignDataGrid}">
+                </DataGrid>
+
+                <Grid Grid.Row="7" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" HorizontalAlignment="Right">
+                        <Button Style="{StaticResource buttonStyle}">
+                            <materialDesign:PackIcon Kind="ArrowBack" Width="25" Height="25"/>
+                        </Button>
+                        <Button Style="{StaticResource buttonStyle}">
+                            <materialDesign:PackIcon Kind="ArrowForward" Width="25" Height="25"/>
+                        </Button>
+                    </StackPanel>
+                    <Label Grid.Row="1"/>
+                </Grid>
+            </Grid>
+        </Grid>
+        
+
+        
     </Grid>
 </Window>

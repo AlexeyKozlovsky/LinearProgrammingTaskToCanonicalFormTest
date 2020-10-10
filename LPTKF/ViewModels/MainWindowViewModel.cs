@@ -1,37 +1,31 @@
-﻿using LPTKF.ViewModels.Base;
+﻿using LPTKF.Models;
+using LPTKF.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LPTKF.ViewModels {
     class MainWindowViewModel : ViewModel {
-        #region Характеристики изначальной формы задачи
 
-        private string variablesInitCount;
-        public string VariablesInitCount {
-            get => variablesInitCount;
-            set => Set(ref variablesInitCount, value);
+        #region Строки и столбцы
+        private string rows = "3";
+        public string Rows {
+            get => rows;
+            set => Set(ref rows, value);
         }
 
-        private string limitSystemExpressionCount;
-        public string LimitSystemExpressionsCount {
-            get => limitSystemExpressionCount;
-            set => Set(ref limitSystemExpressionCount, value);
+        private string columns = "3";
+        public string Columns {
+            get => columns;
+            set => Set(ref columns, value);
         }
-
-        private int goalFunctionAimIndex = 0;
-        public int GoalFunctionAimIndex {
-            get => goalFunctionAimIndex;
-            set => Set(ref goalFunctionAimIndex, value);
-        }
-
-        private List<int> limitCompareOperatorsIndex = new List<int>();
-        public List<int> LimitCompareOperatorsIndex {
-            get => limitCompareOperatorsIndex;
-            set => Set(ref limitCompareOperatorsIndex, value);
-        }
-
-
         #endregion
+
+
+        private GoalFunctionDataGridItem goalFuncDataGrid;
+        public GoalFunctionDataGridItem GoalFuncDataGrid{
+            get => goalFuncDataGrid;
+            set => Set(ref goalFuncDataGrid, value);
+        }
     }
 }
