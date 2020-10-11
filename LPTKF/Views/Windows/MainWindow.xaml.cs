@@ -29,6 +29,8 @@ namespace LPTKF {
         DataTable initGoalFuncDataTable, initLimitSystemDataTable, compareOperatorDataTable;
         DataTable canonGoalFuncDataTable, canonLimitSystemDataTable, solutionDataTable;
 
+        SolutionsField nonNegativeSolutionField;
+
         int solutionNum = 0;
 
 
@@ -111,6 +113,9 @@ namespace LPTKF {
         }
 
         private void InitAll() {
+            varsTextBlock.Text = "";
+            ClearCanonDataGrids();
+
             InitGoalFunc();
             InitLimitSystem();
             InitCompareOperators();
@@ -299,6 +304,7 @@ namespace LPTKF {
 
         private void InitCanonSolutionDataGrid() {
             if (task == null) return;
+            if (nonNegativeSolutionField.BasisSolutions == 0) return;
 
             int rows = task.LinearEquationLimitSystem.Rows;
             int column = task.LinearEquationLimitSystem.Columns;
@@ -313,7 +319,7 @@ namespace LPTKF {
             for (int i = 0; i < rows; i++) {
                 DataRow dataRow = solutionDataTable.NewRow();
                 for (int j = 0; j < column; j++)
-                    dataRow[j] = Math.Round(task.LinearEquationLimitSystem.SolutionsField[0][i, j], 2).ToString();
+                    dataRow[j] = Math.Round(nonNegativeSolutionField[0][i, j], 2).ToString();
 
                 solutionDataTable.Rows.Add(dataRow);
             }
@@ -326,27 +332,33 @@ namespace LPTKF {
         private void UpdateSolutionDataGrid(int num, int demical = 2) {
             if (task == null) return;
 
-            solutionNum = 0;
-
             int rows = task.LinearEquationLimitSystem.Rows;
             int columns = task.LinearEquationLimitSystem.Columns;
 
             for (int i = 0; i < rows; i++) 
                 for (int j = 0; j < columns; j++) 
                     solutionDataTable.DefaultView[i][j] = 
-                        Math.Round(task.LinearEquationLimitSystem.SolutionsField[num][i, j], demical).ToString();
+                        Math.Round(nonNegativeSolutionField[num][i, j], demical).ToString();
         }
 
         
 
         private void Forward() {
-            solutionNum = (solutionNum + 1) % task.LinearEquationLimitSystem.SolutionsField.BasisSolutions;
+            if (solutionNum >= nonNegativeSolutionField.BasisSolutions - 1) return;
+            solutionNum += 1;
             UpdateSolutionDataGrid(solutionNum);
         }
 
         private void Back() {
-            solutionNum = (solutionNum - 1) % task.LinearEquationLimitSystem.SolutionsField.BasisSolutions;
+            if (solutionNum <= 0) return;
+            solutionNum -= 1;
             UpdateSolutionDataGrid(solutionNum);
+        }
+
+        private void ClearCanonDataGrids() {
+            ClearDataGrid(canonGoalFuncDataGrid);
+            ClearDataGrid(canonLimitSystem);
+            ClearDataGrid(solutionsDataGrid);
         }
 
 
@@ -359,6 +371,16 @@ namespace LPTKF {
         private void makeCanonButton_Click(object sender, RoutedEventArgs e) {
             InitLinearProgrammingTask();
             MakeCanonical();
+            solutionNum = 0;
+            nonNegativeSolutionField = new SolutionsField();
+            for (int i = 0; i < task.LinearEquationLimitSystem.SolutionsField.BasisSolutions; i++)
+                if (task.LinearEquationLimitSystem.SolutionsField[i].IsNonNegative) {
+                    if (task.LinearEquationLimitSystem.SolutionsField[i].Precise <= 1E-10) 
+                        nonNegativeSolutionField.Add(task.LinearEquationLimitSystem.SolutionsField[i]);
+                }
+                    
+
+            varsTextBlock.Text = task.ReturnVars();
             InitCanonGoalFunctionDataGrid();
             InitCanonLimitSystemDataGrid();
             InitCanonSolutionDataGrid();

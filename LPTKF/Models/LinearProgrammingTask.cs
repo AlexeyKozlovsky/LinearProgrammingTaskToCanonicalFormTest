@@ -153,11 +153,12 @@ namespace LPTKF.Models {
             this.TaskForm = LinearProgrammingTaskForm.Canonical;
         }
 
-        private string ReturnVars() {
+        public string ReturnVars() {
             string result = "";
+
             foreach (var k in this.variablesDict) {
-                if (k.Key == -k.Value[0]) result += $"x{k.Key + 1} = -x{Math.Abs(k.Value[0]) + 1};\t";
-                else result += $"x{k.Key + 1} = x{Math.Abs(k.Value[0]) + 1} - x{Math.Abs(k.Value[1]) + 1};\t";
+                if (k.Value.Count == 2) result += $"x{k.Key + 1} = x{Math.Abs(k.Value[0]) + 1} - x{Math.Abs(k.Value[1]) + 1}; ";
+                else result += $"x{k.Key + 1} = -x{Math.Abs(k.Value[0]) + 1}; ";
             }
 
             return result;

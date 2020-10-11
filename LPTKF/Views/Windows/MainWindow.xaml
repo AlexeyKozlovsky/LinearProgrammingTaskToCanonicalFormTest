@@ -53,12 +53,12 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="2.5*"/>
+                    <RowDefinition Height="3.5*"/>
                     <RowDefinition/>
-                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="3.5*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="3.5*"/>
+                    <RowDefinition Height="1.5*"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="Изначальная форма" Grid.Row="0" Grid.Column="0"
@@ -116,6 +116,7 @@
                     </StackPanel>
                     <Label Grid.Row="1"/>
                 </Grid>
+                <TextBlock Grid.Row="7" x:Name="varsTextBlock" FontSize="15" Margin="5"/>
             </Grid>
         </Grid>
         
