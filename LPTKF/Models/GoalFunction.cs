@@ -34,6 +34,13 @@ namespace LPTKF.Models {
 
         public GoalFunctionAim Aim { get; private set; }
 
+
+        public GoalFunction(List<double> variableValues, GoalFunctionAim aim) {
+            this.variableValues = variableValues;
+            this.Aim = aim;
+            this.freeValue = 0;
+            this.compareOperator = CompareOperator.Equal;
+        }
         public GoalFunction(List<double> variableValues, CompareOperator compareOperator, double freeValue, 
             GoalFunctionAim aim) {
             this.variableValues = variableValues;

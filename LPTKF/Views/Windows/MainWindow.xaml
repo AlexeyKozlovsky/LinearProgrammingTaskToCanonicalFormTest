@@ -41,6 +41,8 @@
                          Text="{Binding Columns}" x:Name="columnsTextBox"/>
                 <Button Content="Сгенерировать" MinWidth="100" Margin="5" Style="{StaticResource buttonStyle}"
                         x:Name="generateButton" Click="generateButton_Click"/>
+                <Button Content="Преобразовать" MinWidth="100" Margin="5" Style="{StaticResource buttonStyle}"
+                        x:Name="makeCanonButton" Click="makeCanonButton_Click"/>
             </StackPanel>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -81,17 +83,19 @@
                           x:Name="initGoalFunctionDataGrid" CanUserAddRows="False">
                 </DataGrid>
                 <DataGrid Grid.Row="2" Grid.Column="1" Style="{StaticResource MaterialDesignDataGrid}"
-                          >
+                          x:Name="canonGoalFuncDataGrid" CanUserAddRows="False">
                 </DataGrid>
                 <DataGrid Grid.Row="4" Grid.Column="0" Style="{StaticResource MaterialDesignDataGrid}"
-                          x:Name="initLimitSystemDataGrid">
+                          x:Name="initLimitSystemDataGrid" CanUserAddRows="False">
                 </DataGrid>
-                <DataGrid Grid.Row="4" Grid.Column="1" Style="{StaticResource MaterialDesignDataGrid}">
+                <DataGrid Grid.Row="4" Grid.Column="1" Style="{StaticResource MaterialDesignDataGrid}"
+                          x:Name="canonLimitSystem" CanUserAddRows="False">
                 </DataGrid>
                 <DataGrid Grid.Row="6" Grid.Column="0" Style="{StaticResource MaterialDesignDataGrid}"
-                          x:Name="compareOperatorDataGrid">
+                          x:Name="compareOperatorDataGrid" CanUserAddRows="False">
                 </DataGrid>
-                <DataGrid Grid.Row="6" Grid.Column="1" Style="{StaticResource MaterialDesignDataGrid}">
+                <DataGrid Grid.Row="6" Grid.Column="1" Style="{StaticResource MaterialDesignDataGrid}"
+                          x:Name="solutionsDataGrid" CanUserAddRows="False">
                 </DataGrid>
 
                 <Grid Grid.Row="7" Grid.Column="1">
