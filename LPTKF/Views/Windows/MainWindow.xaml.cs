@@ -29,7 +29,7 @@ namespace LPTKF {
         DataTable initGoalFuncDataTable, initLimitSystemDataTable, compareOperatorDataTable;
         DataTable canonGoalFuncDataTable, canonLimitSystemDataTable, solutionDataTable;
 
-
+        int solutionNum = 0;
 
 
         public MainWindow() {
@@ -37,12 +37,16 @@ namespace LPTKF {
             vm = (MainWindowViewModel)DataContext;
         }
 
+        private void ClearDataGrid(DataGrid dataGrid) {
+            dataGrid.ItemsSource = null;
+            dataGrid.Items.Clear();
+            dataGrid.Columns.Clear();
+        }
+
         #region Инициализация DataGrid для начальной формы задачи
 
         private void InitGoalFunc() {
-            
-            initGoalFunctionDataGrid.Items.Clear();
-            initGoalFunctionDataGrid.Columns.Clear();
+            ClearDataGrid(initGoalFunctionDataGrid);
             
             initGoalFuncDataTable = new DataTable();
             for (int i = 0; i < int.Parse(vm.Columns); i++) {
@@ -64,8 +68,7 @@ namespace LPTKF {
             int rows = int.Parse(vm.Rows);
             int columns = int.Parse(vm.Columns);
 
-            initLimitSystemDataGrid.Items.Clear();
-            initLimitSystemDataGrid.Columns.Clear();
+            ClearDataGrid(initLimitSystemDataGrid);
 
             initLimitSystemDataTable = new DataTable();
 
@@ -92,8 +95,8 @@ namespace LPTKF {
         private void InitCompareOperators() {
             int columns = int.Parse(vm.Columns);
 
-            compareOperatorDataGrid.Items.Clear();
-            compareOperatorDataGrid.Columns.Clear();
+            ClearDataGrid(compareOperatorDataGrid);
+
             compareOperatorDataTable = new DataTable();
 
             for (int i = 0; i < columns; i++)
@@ -292,15 +295,59 @@ namespace LPTKF {
             canonLimitSystem.ItemsSource = canonLimitSystemDataTable.DefaultView;
         }
 
+        
+
         private void InitCanonSolutionDataGrid() {
             if (task == null) return;
 
+            int rows = task.LinearEquationLimitSystem.Rows;
+            int column = task.LinearEquationLimitSystem.Columns;
 
+            ClearDataGrid(solutionsDataGrid);
+            solutionDataTable = new DataTable();
+            for (int i = 0; i < column - 1; i++)
+                solutionDataTable.Columns.Add($"x{i + 1}", typeof(string));
+
+            solutionDataTable.Columns.Add("b", typeof(string));
+
+            for (int i = 0; i < rows; i++) {
+                DataRow dataRow = solutionDataTable.NewRow();
+                for (int j = 0; j < column; j++)
+                    dataRow[j] = Math.Round(task.LinearEquationLimitSystem.SolutionsField[0][i, j], 2).ToString();
+
+                solutionDataTable.Rows.Add(dataRow);
+            }
+
+            solutionsDataGrid.ItemsSource = solutionDataTable.DefaultView;
         }
 
         #endregion
 
+        private void UpdateSolutionDataGrid(int num, int demical = 2) {
+            if (task == null) return;
 
+            solutionNum = 0;
+
+            int rows = task.LinearEquationLimitSystem.Rows;
+            int columns = task.LinearEquationLimitSystem.Columns;
+
+            for (int i = 0; i < rows; i++) 
+                for (int j = 0; j < columns; j++) 
+                    solutionDataTable.DefaultView[i][j] = 
+                        Math.Round(task.LinearEquationLimitSystem.SolutionsField[num][i, j], demical).ToString();
+        }
+
+        
+
+        private void Forward() {
+            solutionNum = (solutionNum + 1) % task.LinearEquationLimitSystem.SolutionsField.BasisSolutions;
+            UpdateSolutionDataGrid(solutionNum);
+        }
+
+        private void Back() {
+            solutionNum = (solutionNum - 1) % task.LinearEquationLimitSystem.SolutionsField.BasisSolutions;
+            UpdateSolutionDataGrid(solutionNum);
+        }
 
 
         #region События
@@ -314,6 +361,15 @@ namespace LPTKF {
             MakeCanonical();
             InitCanonGoalFunctionDataGrid();
             InitCanonLimitSystemDataGrid();
+            InitCanonSolutionDataGrid();
+        }
+
+        private void backButton_Click(object sender, RoutedEventArgs e) {
+            Back();
+        }
+
+        private void forwardButton_Click(object sender, RoutedEventArgs e) {
+            Forward();
         }
 
         #endregion

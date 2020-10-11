@@ -105,10 +105,12 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Orientation="Horizontal" FlowDirection="LeftToRight" HorizontalAlignment="Right">
-                        <Button Style="{StaticResource buttonStyle}">
+                        <Button Style="{StaticResource buttonStyle}" x:Name="backButton"
+                                Click="backButton_Click">
                             <materialDesign:PackIcon Kind="ArrowBack" Width="25" Height="25"/>
                         </Button>
-                        <Button Style="{StaticResource buttonStyle}">
+                        <Button Style="{StaticResource buttonStyle}" x:Name="forwardButton"
+                                Click="forwardButton_Click">
                             <materialDesign:PackIcon Kind="ArrowForward" Width="25" Height="25"/>
                         </Button>
                     </StackPanel>
